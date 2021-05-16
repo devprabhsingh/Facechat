@@ -127,7 +127,7 @@
                 formData.append('bio',bio);
                 formData.append('id',id)
             }
-            const res = await axios.put('http://localhost:5000/home/profileUpdate',formData,{
+            const res = await axios.put('/home/profileUpdate',formData,{
                 headers:{
                     'Content-Type': 'multipart/form-data'
                 }
@@ -149,7 +149,7 @@
 
         //fetch request to delete all posts
         document.getElementById('deleteAll').addEventListener('click',async ()=>{
-            const res = await fetch(`http://localhost:5000/home/deleteAll/${id}`,{
+            const res = await fetch(`/home/deleteAll/${id}`,{
                 method:'DELETE'
             })
             const result = res.text();
