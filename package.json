@@ -4,12 +4,8 @@
   "description": "social-media app",
   "main": "server.js",
   "scripts": {
-    "start": "server.js",
-    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install npm && run build"
+    "start": "node server.js"
   },
-  "engines": {
-    "node": "14.17.0"
-},
   "author": "Prabhjot Singh",
   "license": "ISC",
   "dependencies": {

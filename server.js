@@ -28,4 +28,4 @@ app.use('/home',appRoutes)
 
 
 // app runs on port 5000
-app.listen(5000);
+app.listen(process.env.PORT || 5000);
