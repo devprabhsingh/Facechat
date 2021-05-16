@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/92cd18646c.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/css/profileStyle.css">
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <title>FaceChat-Profile</title>
+</head>
+<body>
+    
+    <section id="user-detail">
+        
+        <div id="box1">
+            <% if(user.profileImg) { %>
+            <img src="data:image/<%=user.profileImgType %>;base64,<%=user.profileImg.toString('base64')%>" id="profile-pic">
+            <% }else { %>
+                <img id="profile-pic" src="https://dl.dropbox.com/s/v6mrjen1nbemtqw/person-icon.png?dl=0" alt="a"/>
+                <%}%>
+        </div>
+
+        <div id="box2">
+            <p id="user-name"><%= user.name %></p>
+            <%if(user.bio){%>
+                <p id="bio"><%= user.bio %></p>
+                <%}else{%>
+            <p id="bio">Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi atque del
+                eniti voluptates numquam veniam molestiae quae minima.</p>
+                <%}%>
+        </div>
+            
+        <div id="box3">
+            <%if(nPosts){%>
+            <p id="nposts"><span class="count"><%= nPosts %></span> posts</p>
+            <%}else{ %>
+            <p id="nposts"><span class="count">0</span> posts</p>
+                <% } %>
+            <p id="nfriends"><span class="count">50</span> friends</p>
+            <p id="ncomments"> <span class="count">34</span> comments</p>
+        </div>
+
+        <div id="box4">
+            <button id="editInfo">Edit your Info</button>           
+        </div>
+
+    </section>
+    
+    <section id="section2">
+        <div style="display:flex;">
+        <div class="gallery-icon">
+            <i class="far fa-images"></i>
+        </div>
+        <button id="deleteAll">Delete all Posts</button>
+    </div>
+   
+
+        <% if(userPosts.length!=0){ %>
+            <div id="user-uploads">
+        <% userPosts.forEach(post=>{ %>
+            <%if(post.imgType){%>
+                <img src="data:image/<%=post.imgType %>;base64,<%=post.img.toString('base64')%>">
+            <%}else if(post.desc!=""){%>
+                <p class="textPost"><%= post.desc %> </p>
+            
+       <% }}) %>
+            </div>
+        <%  } %>   
+
+    <%if(userPosts.length==0){%>
+        <p id="noposts">no posts to show</p>
+        <%}%>
+
+</section>
+    <div id="user-info" style="display: none;">
+    <form id="updateinfo">
+        <label>
+            <input type="file" id="profileImgInput">
+            <p id="imgInput">Add Profile Image</p>
+        </label>
+        <textarea id="bioInput" placeholder="Add your bio..."></textarea>
+        <p id="msg" style="display:none;">please add bio or add photo</p>
+        <input id="updateUserInfo" type="submit">
+    </form>
+    <p><i class="far fa-times-circle"></i></p>
+    </div>
+
+    <p id="backButton" onclick="goHome()">Go to Home page</p>
+
+
+
+    <script>
+        const id = "<%= user.id %>";
+        const cross = document.querySelector(".fa-times-circle");
+        const userInfoForm = document.getElementById("user-info");
+        const editInfo = document.getElementById("editInfo");
+
+        // handling form show and hide button
+        cross.addEventListener('click',()=>{
+            if(userInfoForm.style.display=="block") userInfoForm.style.display="none";
+            else userInfoForm.style.display="block";
+        })
+
+        editInfo.addEventListener('click',()=>{
+            userInfoForm.style.display="block";
+        })
+
+
+        // making fetch request to update user info
+        document.getElementById("updateinfo").addEventListener('submit',async(e)=>{
+            e.preventDefault();
+            const profileImg = document.getElementById('profileImgInput').files[0];
+            const bio = document.getElementById('bioInput').value;
+
+            const formData = new FormData();
+
+        //validation of form fields
+        if(profileImg!=undefined || bio!=""){
+            document.getElementById("msg").style.display="none";
+
+            if(profileImg==undefined){
+                formData.append('bio',bio);
+                formData.append('id',id)
+            }else{
+                formData.append('profileImg',profileImg);
+                formData.append('bio',bio);
+                formData.append('id',id)
+            }
+            const res = await axios.put('http://localhost:5000/home/profileUpdate',formData,{
+                headers:{
+                    'Content-Type': 'multipart/form-data'
+                }
+            })
+
+            if(res.statusText=="OK") window.location.href=`/home/profile/${id}`;
+        }else{
+            document.getElementById("msg").style.display="block";
+        }
+            
+
+        })
+
+
+        //go to home button
+        const goHome = ()=>{
+            window.location.href=`/home/${id}`;
+        }
+
+        //fetch request to delete all posts
+        document.getElementById('deleteAll').addEventListener('click',async ()=>{
+            const res = await fetch(`http://localhost:5000/home/deleteAll/${id}`,{
+                method:'DELETE'
+            })
+            const result = res.text();
+            if(result=="done") window.location.href=`/home/${id}`
+        })
+
+    </script>
+
+</body>
+</html>

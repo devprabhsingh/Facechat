@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/authStyle.css" type="text/css">
+    <script src="https://kit.fontawesome.com/92cd18646c.js" crossorigin="anonymous"></script>
+    <title>FaceChat-Auth</title>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+<body>
+<header>
+
+    <h2 id="app-name">FaceChat</h2>
+</header>
+
+<section>
+    <p id="quote-line">
+        Let's connect with your friends and people you love to see
+    </p>
+    <div id="auth-form">
+        <div id="sign-header">
+            <button id="sign-in-button">Sign in</button>
+            <button id="sign-up-button">Sign up</button>
+
+        </div>
+        <form id="sign-in-stuff"class="input-labels-container">
+            <p id="msg1"></p>
+        <p>Email:</p>
+        <input type="text" id="r-user-email" name="username">
+        <p>Password:</p>
+        <input type="password" id="r-user-password" name="password">
+        <input type="submit" value="Sign In"> 
+        </form>
+
+        <form id="sign-up-stuff" class="input-labels-container">
+            <p id="msg2"></p>
+            <p>name:</p>
+            <input type="text" id="user-name" name="name">
+            <p>Email:</p>
+            <input type="text" id="user-email" name="email">
+            <p>Password:</p>
+            <input type="password" id="user-password" name="password">
+            <p>Birth Date:</p>
+            <div>
+                <input id="day" name="bday" placeholder="day" type="number"><br>
+                <select name="bmonth" id="month"><br>
+                    <option value="jan">january</option>
+                    <option value="feb">febuary</option>
+                    <option value="mar">march</option>
+                    <option value="apr">april</option>
+                    <option value="may">may</option>
+                    <option value="jun">june</option>
+                    <option value="jul">july</option>
+                    <option value="aug">august</option>
+                    <option value="sep">september</option>
+                    <option value="oct">october</option>
+                    <option value="nov">november</option>
+                    <option value="dec">december</option>
+                  </select><br>
+                <input id="year" placeholder="year" name="byear" type="number">
+            </div>
+            <input type="submit" value="Sign Up"> 
+        </form>
+        
+    </div>
+</section>
+<script>
+    
+//rendering signin and signup form onClick of their respective buttons
+const signinButton = document.getElementById('sign-in-button');
+const signupButton = document.getElementById('sign-up-button');
+const signinForm = document.getElementById('sign-in-stuff');
+const signupForm = document.getElementById('sign-up-stuff');
+
+signinButton.addEventListener('click',(e)=>{
+    e.preventDefault();
+    signupForm.style.display="none";
+    signinForm.style.display="block";
+
+    signinButton.style.color="white";
+    signinButton.style.backgroundColor="crimson";
+
+    signupButton.style.color="crimson";
+    signupButton.style.backgroundColor="white";    
+})
+
+signupButton.addEventListener('click',(e)=>{
+    e.preventDefault();
+    signupForm.style.display="block";
+    signinForm.style.display="none";
+
+    signupButton.style.color="white";
+    signupButton.style.backgroundColor="crimson";
+
+    signinButton.style.color="crimson";
+    signinButton.style.backgroundColor="white";    
+})
+
+//submitting signup form data
+signupForm.addEventListener('submit',async (e)=>{
+    e.preventDefault()
+    const name = document.getElementById('user-name').value;
+    const email = document.getElementById('user-email').value;
+    const password = document.getElementById('user-password').value;
+    const bday = document.getElementById('day').value;
+    const bmonth = document.getElementById('month').value;
+    const byear = document.getElementById('year').value;
+    const msg = document.getElementById('msg2');
+
+    //reset msg value
+    msg.innerHTML="";
+
+    //validation
+    if(name<6) msg.innerHTML="username is too short(min 6)";
+    else if(!email.endsWith(".com") || email.length<14) msg.innerHTML="email is not valid";
+    else if(password.length<8) msg.innerHTML = "password is too short(min 8)";
+    else if(bday>32 || bday<0) msg.innerHTML = "day is not valid";
+    else if(bmonth.value=="") msg.innerHTML = "Please select month";
+    else if(byear<1910 || byear>2006) msg.innerHTML="date of birth is not valid";
+   
+    if(msg.innerHTML==""){
+            
+        const formData = {
+            name,email,password,dob:bday+bmonth+byear
+        }
+            const res = await fetch("http://localhost:5000/register",{
+                method:'POST',
+                headers:{
+                    'Content-Type':'application/json'
+                },
+                body:JSON.stringify(formData)
+            })
+            const data = await res.json();
+
+            window.location.href=`/home/${data._id}`
+
+        }
+    })
+
+// submitting login form data
+signinForm.addEventListener('submit',async(e)=>{
+    e.preventDefault();
+
+    const email = document.getElementById('r-user-email').value;
+    const password = document.getElementById('r-user-password').value;
+    const msg = document.getElementById('msg1');
+
+    if((email=="" || !email.endsWith('.com')) && password==""){
+        msg.innerHTML="please fill the correct credentials"
+    }else{
+
+        const formData = {
+            email,password
+        }
+        const res = await fetch("http://localhost:5000/login",{
+            method:'POST',
+            headers:{
+                'Content-Type':'application/json'
+            },
+            body:JSON.stringify(formData)
+        })
+        const result = await res.json();
+        if(result.msg=="verified") window.location.href=`/home/${result._id}`
+        else msg.innerHTML = result.msg;
+    }
+    
+})
+</script>
+
+</body>
+</html>

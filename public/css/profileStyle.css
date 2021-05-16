@@ -1,0 +1,221 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family: cursive;
+}
+body{
+    position:relative;
+}
+#profile-pic{
+    display: block;
+    height:200px;
+    margin:auto;
+    width:200px;
+    border-radius: 50%;
+}
+#user-detail{
+    display:grid;
+    height:50vh;
+    grid-template-columns: 50% 50%;
+    grid-template-rows: 70% 30%;
+    justify-items:stretch;
+    align-items: center;
+    padding:30px 0;
+    
+}
+#user-detail >div{
+    width:100%;
+    height:100%;
+}
+
+#box2{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#bio{
+    font-size: 18px;
+    text-align: center;
+    width:60%;
+}
+#box3{
+    display:flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+#box3 p{
+    font-size: 15px;
+    display:flex;
+    align-items:center;
+}
+.count{
+    font-size: 25px;
+    padding:10px;
+    color:white;
+    background:crimson;
+    margin:5px;
+    border-radius:10px;
+}
+
+#box4{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+}
+#box4 button,#updateUserInfo,#deleteAll{
+    padding:10px;
+    margin:2px;
+    border:none;
+    outline:none;
+    background-color:crimson;
+    color:white;
+    cursor:pointer;
+    width:140px;
+    font-weight: bold;
+    border-radius: 10px;
+    border:2px solid crimson;
+}
+#box4 button:hover,#updateUserInfo:hover,#deleteAll:hover{
+    background-color: white;
+    border:2px solid crimson;
+    color:crimson;
+}
+#user-name{
+    font-size: 25px;
+    padding:5px;
+    font-weight: bold;
+}
+
+#section2{
+    width:90%;
+    margin:auto;
+}
+#user-uploads{
+    margin-top: 10px;
+    padding:40px;
+    padding-top:0;
+    background-color: rgb(228, 228, 228);
+    display:grid;
+    grid-template-columns: auto auto auto auto auto;
+    grid-template-rows: auto;
+    grid-row-gap:20px;
+}
+#user-uploads>img{
+  width:250px;
+  height:250px;
+border-radius:10px;
+}
+.textPost{
+    font-size: 20px;
+    text-align:center;
+    padding-top:15%;
+    padding-left:5px;
+    padding-right:5px;
+    background-color: lightgray;
+    width:250px;
+    height:250px;
+    border-radius:10px;
+}
+.gallery-icon{
+    background-color: lightgrey; 
+    flex:0.9;
+}
+#deleteAll{
+    padding:15px;
+    flex:0.1;
+    font-family:sans-serif;
+    border-radius: 0%;
+    font-size:16px;
+}
+.fa-images{
+    padding:15px 0;
+    margin:auto;
+    display: block;
+    width:30px;
+    font-size: 30px;
+}
+
+#user-info{
+    padding:10px;
+    position:absolute;
+    top:30vh; 
+    width:25%;
+    left:37%;   
+    background:white;
+    box-shadow: 0 4px 8px 0 crimson, 0 6px 20px 0 crimson;
+}
+#user-info>form{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    margin-left:10px;
+    display:flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    width:90%;
+}
+#imgInput{
+    border-radius:50%;
+    background:lightgray;
+    width:100px;
+    padding:10px 25px;
+    cursor:pointer;
+}
+form>textarea{
+    width:90%;
+    height:16vh;
+    margin:10px 0;
+}
+#user-info>p{
+    height:20px;
+    font-size:20px;
+    cursor:pointer;
+    position:absolute;
+    right:10px;
+    top:10px;
+}
+#user-info>p:hover{
+    color:crimson;
+}
+#profileImgInput{
+    display:none;
+}
+
+#noposts{
+    margin-top: 10px;
+    background:lightgray;
+    text-align: center;
+    padding:10px 0;
+    font-size: 15px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+#backButton{
+    padding:10px;
+    background-color:crimson;
+    color:white;
+    cursor:pointer;
+    width:200px;
+    margin:auto;
+    margin-top:20px;
+    text-align: center;
+    font-weight: bold;
+    border-radius: 10px;
+    border:2px solid crimson;
+}
+#backButton:hover{
+    background-color: white;
+    border:2px solid crimson;
+    color:crimson;
+}
+
+
+
+
+@media only screen and (max-width:800px){
+    #user-uploads{
+        grid-template-columns: auto auto auto auto;
+    }
+}

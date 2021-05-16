@@ -1,0 +1,392 @@
+/* styles for home page */
+*{
+    margin:0;
+    padding:0;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+header{
+    height:10vh;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    position:fixed;
+    top:0;
+    left:0;
+    right:0;
+    z-index:1;
+    background-color: white;
+}
+::placeholder{
+  margin-left:5px;
+}
+#name{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+#logo{
+    border-radius:20px;
+    background-color: crimson;
+    color:white;
+    font-size: 20px;
+    padding:10px;
+}
+#app-name{
+    font-size:30px;
+    padding:20px;
+    color:crimson;
+}
+nav{
+    width:30%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.nav-link{
+    height:9vh;
+    cursor:pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding:0 40px;
+    border-radius: 5px;
+}
+.nav-link:hover{
+    background-color:lightgray;
+    color:crimson;
+}
+.nav-link i{
+    font-size: 20px;
+}
+#search-input{
+    border:none;
+    padding:10px 0;
+    color:crimson;
+    font-size: 15px;
+    outline:none;
+    background-color: lightgray;
+    border-radius:5px;
+}
+
+#profile-pic{
+    height:40px;
+    width:40px;
+    cursor:pointer;
+    border-radius:50%;
+}
+main{ 
+    margin-top:10vh;
+    display:flex;
+    justify-content: space-around;
+    flex-direction:row;
+      
+}
+
+#s2{
+    width:47%;
+  }
+
+
+/* styles for addpost section */
+
+#addPost{
+    width:100%;
+    min-height:30vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    background:rgb(211, 211, 211,0.4);
+    border-radius:10px;
+}
+
+#fileInput{
+    display: none;
+}
+#uploadbutton{
+    padding:10px;
+    border:none;
+    outline:none;
+    font-size: 15px;
+    cursor:pointer;
+    color:white;
+    background-color:grey;
+}
+#imgdesc{
+    border:none;
+    padding:none;
+    outline:none;
+    width:70%;
+    font-size: 15px;
+    border-bottom:2px solid grey;
+    background:rgb(211, 211, 211,0.2);
+}
+#imgdesc:active,#imgdesc:hover{
+    border-bottom-color:black;
+}
+#addPost>input[type="submit"],#signOut{
+  padding:10px;
+  margin:2px;
+  border:none;
+  outline:none;
+  background-color:crimson;
+  color:white;
+  cursor:pointer;
+  width:140px;
+  font-weight: bold;
+  border-radius: 10px;
+  border:2px solid crimson;
+}
+#addPost>input[type="submit"]:hover,#signOut:hover{
+  background-color: white;
+  border:2px solid crimson;
+  color:crimson;
+}
+#signOut{
+  width:100px;
+}
+#previewImg{
+    display:none;
+    height:250px;
+    width:350px;
+}
+
+/* styles for sidenavbar section */
+#sidenavbar{
+    position:sticky;
+    left:30px;
+    top:10vh;
+    width:21%;
+    background:rgb(211, 211, 211,0.4);
+    height:88vh;
+    overflow:scroll;
+    border-radius:15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: left;
+  }
+  #sidenavbar::-webkit-scrollbar {
+    display: none;
+  }
+  
+  #sidenavbar >div{
+    padding:20px 0 20px 10px;
+    display: flex;
+    align-items: center;
+    background-color: rgb(211, 211, 211,0.4);
+  }
+  #sidenavbar >div>i{
+    display: block;
+    width:15%;
+    padding-left:3px;
+  }
+  #sidenavbar>div>p{
+    color:crimson;
+    cursor:pointer;
+  }
+  #sidenavbar>div>p>a{
+  color:crimson;
+  }
+  .fa-shield-virus{
+    color:rgb(63, 171, 214);
+  }
+  .fa-calendar-week{
+    color:orange;
+  }
+  .fa-memory{
+    color:seagreen;
+  }
+  .fa-save{
+    color:green;
+  }
+  .fa-star{
+    color:gold;
+  }
+  .fa-question-circle{
+    color:blue;
+  }
+  .fa-cloud-sun{
+    color:yellowgreen;
+  }
+  .fa-arrow-alt-circle-down{
+    color:red;
+  }
+  
+  
+  
+  
+  /*  styles for follow-section  */
+#follow-section{
+    position:sticky;
+    right:30px;
+    top:10vh;
+    width:25%;
+    background:rgb(211, 211, 211,0.4);
+    height:88vh;
+    overflow:scroll;
+    border-radius:15px;
+  }
+  #follow-section::-webkit-scrollbar {
+    display: none;
+  }
+  .follow-tile{
+    margin:4px;
+    padding:7px 0;
+    background-color: rgb(211, 211, 211,0.4);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  }
+  .user-img{
+    border-radius:50%;
+    padding:5px;
+    height:30px;
+    width:30px;
+    border:4px solid rgb(189, 9, 39);
+  }
+  
+  .follow-tile>div{
+    flex:0.50;
+  }
+  .follow-tile>div>p{
+    margin-bottom:5px;
+  }
+  .follow-button{
+    width:100px;
+    height:40px;
+    padding:10px;
+    border:none;
+    outline:none;
+    cursor:pointer;
+    background:crimson;
+    color:white;
+  }
+  .follow-section-heading{
+    padding:20px;
+    color:rgb(189,9,39);
+    text-align:center;
+  }
+  
+  .remove-follower,.fa-times{
+    flex:0.10;
+    border:none;
+    outline:none;
+    background:none;
+    color:rgb(250, 6, 46);
+    font-size:35px;
+    cursor:pointer;
+  }
+
+  #no-more{
+    text-align:center;
+    font-style:italic;
+  }
+  
+  
+ /* styles for postrender section  */
+#post-render{
+  width:100%;
+  margin-top: 20px;
+}
+
+.post-container{
+  width:100%;
+  margin:auto;
+  margin-bottom:15px;
+  border-radius: 15px;
+  background:rgb(211, 211, 211,0.4);
+  position:relative;
+}
+
+.user-info{
+  display:flex;
+  align-items:center;
+  padding:20px 0 0 20px;
+}
+.user-img{
+  border-radius:50%;
+  padding:5px;
+  border:4px solid rgb(189, 9, 39);
+}
+.username{
+  margin-left:20px;
+}
+.photo{
+  display:block;
+  height:400px;
+  width:80%;
+  margin:auto;
+}
+.photo-desc{
+  font-size:17px;
+  font-family:verdana;
+  width:80%;
+  margin:10px auto;
+  font-family:arial;
+}
+.user-review{
+  width:80%;
+  display:flex;
+  height:60px;
+  justify-content:space-evenly;
+  align-items:center;
+  margin:auto;
+}
+.user-review>button{
+  cursor:pointer;
+  height:5vh;
+}
+.comment-section{
+  height:5vh;
+}
+.far,.fas{
+  font-size:30px;
+  
+}
+.fa-thumbs-down,.fa-share-square,.fa-thumbs-up{
+  background:rgb(211, 211, 211,0.4);
+}
+.user-review button{
+  outline:none;
+  border:none;
+}
+.user-review button:focus{
+  
+  color:rgb(250, 6, 46);
+}
+.user-review input{
+  border:none;
+  background:pink;
+  outline:none;
+  width:60%;
+}
+.fa-share-square:focus{
+  color:rgb(250, 6, 46);
+}
+
+@media only screen and (max-width:800px){
+  #follow-section{
+    display:none;
+  }
+  #sidenavbar{
+    width:40%;
+  }
+}
+@media only screen and (max-width:600px){
+  nav,#search-input{
+    display:none;
+  }
+  #sidenavbar{
+    display:none;
+  }
+  #s2{
+    width:90%;
+  }
+  .photo{
+    height:250px;
+  }
+  
+}

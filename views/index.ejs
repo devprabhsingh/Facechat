@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/homeStyle.css" type="text/css">
+    <script src="https://kit.fontawesome.com/92cd18646c.js" crossorigin="anonymous"></script>
+    <title>FaceChat</title>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+<body>
+    <header>
+        <div id="name">
+        <p id="logo">F</p>
+        <p id="app-name">FaceChat</p>
+        </div>
+        <nav>
+            <div class="nav-link">
+                <i class="fas fa-home"></i>
+            </div>
+            <div class="nav-link">
+                <i class="fas fa-user-friends"></i>
+            </div>
+            <div class="nav-link">
+                <i class="fas fa-users"></i>
+            </div>
+        </nav>
+        <input placeholder="Search FaceChat" id="search-input">
+
+        <button id="signOut" onclick="signOut()">sign out</button>
+
+         <% if(user.profileImg){ %>
+            <img id="profile-pic" src = "data:image/<%=user.profileImgType %>;base64,<%=user.profileImg.toString('base64')%>" 
+            onclick="getProfile()" alt = "img"/>
+            <% }else{ %>
+                <img id="profile-pic" src = "https://dl.dropbox.com/s/v6mrjen1nbemtqw/person-icon.png?dl=0" 
+                onclick="getProfile()" alt = "img"/>
+                <% } %> 
+    </header>
+    
+    <main>
+        <section id="sidenavbar">
+            <div>
+                <p>Prabh Singh</p>
+            </div>
+           <div>
+            <i class="fas fa-shield-virus"></i>
+              <p> <a href="https://covid-19.ontario.ca/index.html"> COVID-19 Info</a></p></div>
+            <div><i class="fas fa-calendar-week"></i><p>Events</p> </div>
+            <div><i class="fas fa-memory"></i><p>Memories</p> </div>
+            <div><i class="fas fa-save"></i><p>Saved</p> </div>
+            <div><i class="fas fa-star"></i><p>Favourites</p> </div>
+            <div><i class="fas fa-question-circle"></i> <p>Help/Support</p></div>
+           <div>
+                <i class="fas fa-cloud-sun"></i>
+                <p><a href="http://prabhjot2002.github.io/weatherApp"> Weather</a></p>
+            </div>
+            <div><i class="fas fa-arrow-alt-circle-down"></i>
+            <p>Show More</p></div>
+            </section>
+    
+    <section id="s2">
+    <form id="addPost">
+        <input type="text" id="imgdesc"
+         placeholder="say something here..">
+        <label>
+            <input type="file" id="fileInput">
+            <p id="uploadbutton">Upload Photo</p>
+        </label>
+        <img src="" id='previewImg'>
+        <input type="submit" value="Add Post">
+    </form>
+
+
+    
+    <div id="post-render">
+       
+            <% posts.forEach(post=>{%>
+
+    <div class="post-container">
+
+        <div class="user-info">
+            <% if(user.profileImg){ %>
+            <img class="user-img" src = "data:image/<%=user.profileImgType %>;base64,<%=user.profileImg.toString('base64')%>" alt = "img"/>
+            <% }else{ %>
+                <img class="user-img" src = "https://dl.dropbox.com/s/v6mrjen1nbemtqw/person-icon.png?dl=0" alt = "img"/>
+                <% } %> 
+
+            <% if(user.name){ %>   
+            <h3 class="username" ><%= user.name %></h3>
+            <% }else{ %>
+                <h3 class="username" >anonymous</h3> 
+                <% } %>
+        </div>
+
+        <% if(post.desc) {%>
+        <p class="photo-desc"><%= post.desc %></p>
+            <% } %>
+        <% if(post.img) {%>
+        <img class ="photo" 
+        src="data:image/<%=post.imgType %>;base64,<%=post.img.toString('base64')%>"
+         alt="img"/>
+        <% } %>
+        <div class="user-review">
+        <button><i class="far fa-thumbs-up"></i></button>
+        <button ><i class="far fa-thumbs-down"></i></button>
+        <input placeholder="Add your comment" class="comment-section"/>
+        <button ><i class="far fa-paper-plane"></i></i></button>
+        </div>
+        
+        
+    </div>
+    <% }) %>
+</div>
+
+
+
+    </section>
+
+    <section id="follow-section">
+    
+        <h3 class="follow-section-heading">People you can follow</h3>
+        <div id="followers">
+        
+            <div class="follow-tile">
+                <img class="user-img" src="https://pbs.twimg.com/profile_images/988775660163252226/XpgonN0X_400x400.jpg" alt="a"/>
+                <div>
+                 <p> Bill Gates</p>
+                 
+                 <input type="button" class="follow-button" onClick={this.toggleFollow} value="Follow"/>
+                 </div>
+                 <i class="remove-follower fas fa-times"></i>
+             </div>
+
+             <div class="follow-tile">
+                <img class="user-img" src="https://www.biography.com/.image/t_share/MTY2NzA3ODE3OTgwMzcyMjYw/jeff-bezos-andrew-harrer_bloomberg-via-getty-images.jpg" alt="a"/>
+                <div>
+                 <p> Jeff Bezos</p>
+                 
+                 <input type="button" class="follow-button" onClick={this.toggleFollow} value="Follow"/>
+                 </div>
+                 <i class="remove-follower fas fa-times"></i>
+             </div>
+             <div class="follow-tile">
+                <img class="user-img" src="https://upload.wikimedia.org/wikipedia/commons/8/85/Elon_Musk_Royal_Society_%28crop1%29.jpg" alt="a"/>
+                <div>
+                 <p> Elon Musk</p>
+                 
+                 <input type="button" class="follow-button" onClick={this.toggleFollow} value="Follow"/>
+                 </div>
+                 <i class="remove-follower fas fa-times"></i>
+             </div>
+             <div class="follow-tile">
+                <img class="user-img" src="https://www.biography.com/.image/ar_1:1%2Cc_fill%2Ccs_srgb%2Cfl_progressive%2Cq_auto:good%2Cw_1200/MTQyMDA0NDgwMzUzNzcyNjA2/mark-zuckerberg_gettyimages-512304736jpg.jpg" alt="a"/>
+                <div>
+                 <p> Mark Zuckerburg</p>
+                 
+                 <input type="button" class="follow-button" onClick={this.toggleFollow} value="Follow"/>
+                 </div>
+                 <i class="remove-follower fas fa-times"></i>
+             </div>
+
+             <div class="follow-tile">
+                <img class="user-img" src="https://c.ndtvimg.com/2020-02/7g9ikec_sidhu-moose-wala-instagram_625x300_02_February_20.jpg" alt="a"/>
+                <div>
+                 <p> Sidhu Moose Wala</p>
+                 
+                 <input type="button" class="follow-button" onClick={this.toggleFollow} value="Follow"/>
+                 </div>
+                 <i class="remove-follower fas fa-times"></i>
+             </div>
+
+             <div class="follow-tile">
+                <img class="user-img" src="https://upload.wikimedia.org/wikipedia/commons/6/65/Karan_Aujla_in_studio.jpg" alt="a"/>
+                <div>
+                 <p> Karan Aujla</p>
+                 
+                 <input type="button" class="follow-button" onClick={this.toggleFollow} value="Follow"/>
+                 </div>
+                 <i class="remove-follower fas fa-times"></i>
+             </div>
+
+             <div class="follow-tile">
+                <img class="user-img" src="https://bbts1.azureedge.net/images/p/full/2019/07/d6229a95-fd28-441f-a7c8-961a16351b48.jpg" alt="a"/>
+                <div>
+                 <p> Tony Stark</p>
+                 
+                 <input type="button" class="follow-button" onClick={this.toggleFollow} value="Follow"/>
+                 </div>
+                 <i class="remove-follower fas fa-times"></i>
+             </div>
+            
+             
+        </div>
+       
+    </section>
+
+    
+    </main>
+    <script>
+        
+        const userId ="<%= user._id %>";
+
+        function getProfile(){
+            window.location.href=`/home/profile/${userId}`
+        }
+
+        // handling submission of post to server
+
+        const imgInput = document.getElementById('fileInput');
+        const previewImg = document.getElementById('previewImg');
+        const addPost = document.getElementById('addPost');
+        const uploadbutton = document.getElementById('uploadbutton');
+
+    // listening to onchange event of input type file and showing it 
+    // before adding post
+    imgInput.addEventListener('change',(e)=>{
+        const src = URL.createObjectURL(e.target.files[0]);
+        previewImg.src = src;
+        previewImg.style.display = "block";
+        addPost.style.height="60vh";
+        uploadbutton.style.display="none";
+    })
+
+    // submitting the post to server
+    addPost.addEventListener('submit',async(e)=>{
+        e.preventDefault();
+
+        const img = document.getElementById('fileInput').files[0];
+        const desc = document.getElementById('imgdesc').value;
+
+        //validation 
+        if(desc!="" || img!==undefined){
+
+        const formData = new FormData();
+        formData.append('user_id',userId);
+        if(img){
+        formData.append('img',img);
+        }
+        formData.append('desc',desc);
+        
+            const res = await axios.post('http://localhost:5000/home/upload',formData,{
+                headers:{
+                    'Content-Type': 'multipart/form-data'
+                }
+            })
+            window.location.href=`/home/${userId}`
+
+        }
+    })
+
+    //signout button
+const signOut = ()=>{
+    window.location.href="/"
+}
+
+
+    </script>
+</body>
+</html>

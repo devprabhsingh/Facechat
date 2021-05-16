@@ -1,0 +1,98 @@
+*{
+    margin:0;
+    padding:0;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+}
+/* styles for auth page */
+header{
+    height:10vh;
+}
+#app-name{
+    text-align: center;
+    font-size:30px;
+    padding:20px;
+    color:crimson;
+}
+section{
+    width:80%;
+    margin:auto;
+    height:80vh;
+    display:flex;
+    justify-content: space-around;
+    align-items: center;
+}
+#quote-line{
+    font-size:20px;
+}
+#auth-form{
+    box-shadow: 0 4px 8px 0 crimson, 0 6px 20px 0 crimson;
+    border-radius:5px;
+}
+
+#sign-header{
+    display:flex;
+    justify-content: center;
+    margin-bottom:20px;
+}
+#sign-in-button,#sign-up-button{
+    padding:10px;
+    font-size:15px;
+    color:crimson;
+    width:100px;
+    text-align: center;
+    border:none;
+    outline:none;
+    cursor:pointer;
+}
+#sign-in-button{
+    background:crimson;
+    color:white;
+}
+#sign-in-stuff{
+    
+}
+#sign-up-stuff{
+    display: none;
+}
+input:not(input[type="submit"]),select{
+    border:none;
+    outline:none;
+    background:lightgrey;
+    border-radius:3px;
+    height:30px;
+    margin-bottom:15px;
+    width:100%;
+}
+#month{
+    background:lightgray;
+}
+option{
+    color:black;
+}
+.input-labels-container{
+    padding:20px 60px;
+}
+input[type="submit"]{
+    width:40%;
+    border:none;
+    outline:none;
+    padding:10px;
+    background-color: crimson;
+    color:white;
+    margin-bottom:15px;
+    margin-left:35%;
+    cursor:pointer;
+}
+
+#msg1,#msg2{
+    color:red;
+    font-size:14px;
+    font-style:italic;
+}
+
+@media only screen and (max-width:600px){
+    section{
+        flex-direction: column;
+    }
+
+}
