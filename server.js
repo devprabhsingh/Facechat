@@ -7,6 +7,7 @@ const authRoutes = require('./routes/authRoutes');
 const appRoutes = require('./routes/appRoutes');
 
 const DB_URL = "mongodb+srv://Prabh02:prabh2002@sandbox.bi8od.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
+//const DB_URL = "mongodb://localhost:27017/facechatdb"
 
 const app = express();
 

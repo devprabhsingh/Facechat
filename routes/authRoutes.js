@@ -11,7 +11,7 @@ router.get('/',(req,res)=>{
 router.post('/register',async(req,res)=>{
     const user = new User({
         name:req.body.name,
-        email:req.body.email,
+        email:req.body.email.toLowerCase(),
         password:req.body.password,
         dob:req.body.dob
     })
@@ -27,14 +27,15 @@ router.post('/register',async(req,res)=>{
 
 // login for existing user
 router.post('/login',async(req,res)=>{
-
-    await User.findOne({email:req.body.email},(err,user)=>{
+    const email = req.body.email.toLowerCase();
+    console.log(email)
+    await User.findOne({email:email},(err,user)=>{
 
         // verfying email id
-        if(err) return res.send({msg:"email id does not exists"})
+        if(user==null) return res.send({msg:"email not exist"})
 
         //verfying password
-        if(user.password!=req.body.password) return res.send({msg:"password is wrong"})
+        if(user.password!=req.body.password) return res.send({msg:"wrong password"})
         else return res.send({_id:user._id,msg:"verified"});
     })
 })

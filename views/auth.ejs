@@ -146,7 +146,7 @@ signinForm.addEventListener('submit',async(e)=>{
     const password = document.getElementById('r-user-password').value;
     const msg = document.getElementById('msg1');
 
-    if((email=="" || !email.endsWith('.com')) && password==""){
+    if((email=="" || !email.endsWith('.com')) || password==""){
         msg.innerHTML="please fill the correct credentials"
     }else{
 
@@ -162,7 +162,9 @@ signinForm.addEventListener('submit',async(e)=>{
         })
         const result = await res.json();
         if(result.msg=="verified") window.location.href=`/home/${result._id}`
-        else msg.innerHTML = result.msg;
+        else{
+            msg.innerHTML = result.msg;
+        } 
     }
     
 })
